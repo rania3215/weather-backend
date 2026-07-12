@@ -1,27 +1,29 @@
 # Weather Backend API
 
-A- Description
-
 A FastAPI weather application with CRUD operations,
 database persistence, external API integration,
 and data export functionality.
 
-B- Technologies
+a- Technologies
 
  FastAPI ,Python ,SQLite ,SQLAlchemy ,OpenWeather API
 
-C- Features
+b- Features
 
-1- Get current weather
-2- Location validation
-3- Weather history storage
-4- CRUD operations
-5- CSV export
-6- Geocoding integration
-7- Air Quality information
-8- Map integration
+1. Get current weather by location
+2. Store weather records in SQLite
+3. CRUD operations:
+4. Create weather records
+5. Read weather history
+6. Update records
+7. Delete records
+8. Location validation and geocoding
+9. Map integration
+10. Export data:
+11. CSV
+12. JSON
 
-D- Run Project
+c- Run Project
 step 1 Install dependencies:
 
 pip install -r requirements.txt
@@ -32,5 +34,5 @@ uvicorn app.main:app --reload
 
 step3 API Documentation:
 
-in your browser paste the link below 
+in your browser paste the link below :
 http://127.0.0.1:8000/docs
