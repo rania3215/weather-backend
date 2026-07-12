@@ -17,6 +17,8 @@ from .map_service import create_map_link
 
 from .air_quality_service import get_air_quality
 
+from fastapi.responses import JSONResponse
+
 # Create database tables
 Base.metadata.create_all(bind=engine)
 
@@ -147,20 +149,19 @@ def update_weather(
     db: Session = Depends(get_db)
 ):
 
+    location = location.strip()
+
     updated = crud.update_weather(
         db,
         record_id,
         location
     )
 
-
     if updated is None:
-
         raise HTTPException(
             status_code=404,
             detail="Record not found"
         )
-
 
     return updated
 
@@ -283,3 +284,24 @@ def air_quality(location: str):
         "country": coordinates["country"],
         "air_quality": result
     }
+
+@app.get("/export/json")
+def export_weather_json(
+    db: Session = Depends(get_db)
+):
+
+    records = crud.get_weather_records(db)
+
+    return JSONResponse(
+        content=[
+            {
+                "id": record.id,
+                "location": record.location,
+                "temperature": record.temperature,
+                "humidity": record.humidity,
+                "description": record.description,
+                "created_at": str(record.created_at)
+            }
+            for record in records
+        ]
+    )
