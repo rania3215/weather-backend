@@ -18,7 +18,7 @@ from .map_service import create_map_link
 from .air_quality_service import get_air_quality
 
 from fastapi.responses import JSONResponse
-
+from fastapi.middleware.cors import CORSMiddleware
 # Create database tables
 Base.metadata.create_all(bind=engine)
 
@@ -27,7 +27,15 @@ app = FastAPI(
     title="Weather Backend API",
     version="1.0"
 )
-
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:5173"
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Database connection
 def get_db():

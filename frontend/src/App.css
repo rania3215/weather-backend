@@ -1,0 +1,156 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: url("C:\Users\user\weather-backend\frontend\src\assets\istockphoto-1097573496-612x612.jpg");
+}
+
+
+.container {
+
+  width: 80%;
+  margin: auto;
+  padding: 40px;
+
+}
+
+
+h1 {
+
+  text-align: center;
+  color: #283342;
+
+}
+
+
+.card {
+
+  background: rgb(55, 73, 97);
+  padding: 25px;
+  margin-top: 20px;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(72, 62, 62, 0);
+
+}
+ 
+.air-card {
+
+  text-align: center;
+
+}
+
+
+.air-card h2 {
+
+  color: rgb(55, 73, 97);
+
+}
+
+input {
+
+  padding: 12px;
+  width: 250px;
+  border-radius: 8px;
+  border: 1px solid #000000ea;
+
+}
+
+
+button {
+
+  padding: 12px 18px;
+  margin: 5px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background: rgb(55, 73, 97);
+  color: rgba(255, 255, 255, 0.815);
+
+}
+
+
+button:hover {
+
+  opacity: 0.8;
+
+}
+
+
+.weather-info {
+
+  text-align: center;
+
+}
+
+
+table {
+
+  width: 100%;
+  margin-top: 20px;
+  border-collapse: collapse;
+  color: rgba(255, 255, 255, 0.815);
+}
+
+
+th, td {
+
+  padding: 12px;
+  text-align: center;
+  border-bottom: 1px solid #050404;
+
+}
+
+
+th {
+
+  background: rgb(55, 73, 97);
+  color: rgb(195, 203, 212);
+
+}
+
+.temperature {
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+
+}
+
+
+.temperature h1 {
+
+  font-size: 45px;
+  margin: 10px;
+
+}
+
+
+.weather-info {
+
+  text-align: center;
+
+}
+a {
+
+  display: inline-block;
+  margin-top: 15px;
+  color: #16a34a;
+  font-weight: bold;
+  text-decoration: none;
+
+}
+
+
+a:hover {
+
+  text-decoration: underline;
+
+}
+
+.error {
+
+  color: red;
+  font-weight: bold;
+  text-align: center;
+
+}
