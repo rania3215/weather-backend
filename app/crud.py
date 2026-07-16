@@ -16,19 +16,35 @@ def get_weather_by_id(db: Session, record_id: int):
     )
 
 
-# UPDATE
-def update_weather(
-        db: Session,
-        record_id: int,
-        location: str
-):
+def update_weather(db, record_id, location):
 
-    record = get_weather_by_id(db, record_id)
+    record = db.query(models.WeatherRecord).filter(
+        models.WeatherRecord.id == record_id
+    ).first()
 
-    if record:
-        record.location = location
-        db.commit()
-        db.refresh(record)
+
+    if record is None:
+        return None
+
+
+    from .weather_service import get_weather
+
+    weather = get_weather(location)
+
+
+    if weather is None:
+        return None
+
+
+    record.location = location
+    record.temperature = weather["temperature"]
+    record.humidity = weather["humidity"]
+    record.description = weather["description"]
+
+
+    db.commit()
+    db.refresh(record)
+
 
     return record
 

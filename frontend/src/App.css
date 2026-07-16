@@ -1,7 +1,16 @@
 body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: url("C:\Users\user\weather-backend\frontend\src\assets\istockphoto-1097573496-612x612.jpg");
+
+  background: url("./assets/background.jpg");
+  background-size: cover;
+
+  background-position: center;
+
+  background-repeat: no-repeat;
+
+  background-attachment: fixed;
+  
+
+  
 }
 
 
@@ -17,7 +26,7 @@ body {
 h1 {
 
   text-align: center;
-  color: #283342;
+  color: #191f27;
 
 }
 
@@ -41,7 +50,7 @@ h1 {
 
 .air-card h2 {
 
-  color: rgb(55, 73, 97);
+  color: rgb(248, 248, 248);
 
 }
 
@@ -57,20 +66,37 @@ input {
 
 button {
 
-  padding: 12px 18px;
-  margin: 5px;
-  border: none;
-  border-radius: 8px;
+  background: rgba(40, 77, 116, 0.18);
+
+  backdrop-filter: blur(10px);
+
+  -webkit-backdrop-filter: blur(10px);
+
+  color: white;
+
+  border: 1px solid rgba(255,255,255,0.3);
+
+  padding: 12px 20px;
+
+  margin: 8px;
+
+  border-radius: 15px;
+
   cursor: pointer;
-  background: rgb(55, 73, 97);
-  color: rgba(255, 255, 255, 0.815);
+
+  font-size: 15px;
+
+  transition: 0.3s;
 
 }
 
 
+
 button:hover {
 
-  opacity: 0.8;
+  background: rgba(81, 48, 48, 0.35);
+
+  transform: translateY(-2px);
 
 }
 
@@ -85,25 +111,44 @@ button:hover {
 table {
 
   width: 100%;
-  margin-top: 20px;
+
   border-collapse: collapse;
-  color: rgba(255, 255, 255, 0.815);
+
+  background: rgba(0, 0, 0, 0.066);
+
+  backdrop-filter: blur(10px);
+
+  -webkit-backdrop-filter: blur(10px);
+
+  border-radius: 15px;
+
+  overflow: hidden;
+
+  color: rgb(255, 255, 255);
+
 }
 
 
-th, td {
+td {
 
-  padding: 12px;
+  background: rgba(58, 117, 172, 0.51);
+
+  padding: 10px;
+
   text-align: center;
-  border-bottom: 1px solid #050404;
+
+  backdrop-filter: blur(5px);
 
 }
 
 
 th {
 
-  background: rgb(55, 73, 97);
-  color: rgb(195, 203, 212);
+  background: rgba(0,0,0,0.25);
+
+  padding: 12px;
+
+  text-align: center;
 
 }
 
@@ -134,7 +179,7 @@ a {
 
   display: inline-block;
   margin-top: 15px;
-  color: #16a34a;
+  color: #334245;
   font-weight: bold;
   text-decoration: none;
 
@@ -149,8 +194,237 @@ a:hover {
 
 .error {
 
-  color: red;
+  color: rgb(255, 0, 0);
   font-weight: bold;
   text-align: center;
 
+}
+
+
+@media(max-width:768px){
+
+.container{
+    width:95%;
+}
+
+input {
+
+  background: rgba(35, 92, 130, 0.15);
+
+  backdrop-filter: blur(10px);
+
+  border: 1px solid rgba(255,255,255,0.3);
+
+  color: white;
+
+  padding: 12px;
+
+  border-radius: 15px;
+
+  outline: none;
+
+}
+input::placeholder {
+
+  color: rgba(255, 255, 255, 0.983);
+
+}
+button{
+    width:90%;
+    margin:5px;
+}
+
+.forecast-container{
+    flex-direction:column;
+
+}
+
+table{
+    font-size:12px;
+}
+
+}
+.videos-container {
+  display: flex;
+  gap: 15px;
+  overflow-x: auto;
+  padding: 10px;
+  scroll-behavior: smooth;
+}
+
+
+
+.videos-container::-webkit-scrollbar {
+  height: 8px;
+}
+
+
+.videos-container::-webkit-scrollbar-thumb {
+  background: #658096;
+  border-radius: 10px;
+}
+
+
+.video-card {
+
+  min-width: 220px;
+  max-width: 220px;
+
+  background: rgb(61, 101, 148);
+
+  border-radius: 12px;
+
+  padding: 10px;
+
+  box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+
+}
+
+
+.video-card img {
+
+  width: 100%;
+
+  height: 120px;
+
+  object-fit: cover;
+
+  border-radius: 10px;
+
+}
+
+
+.video-card h3 {
+
+  font-size: 14px;
+
+  height: 45px;
+
+  overflow: hidden;
+
+}
+
+
+
+
+
+
+
+
+.map-card iframe {
+
+  border-radius: 20px;
+
+  box-shadow: 0 5px 20px rgba(0,0,0,0.25);
+
+}
+.card {
+
+  background: linear-gradient(
+    135deg,
+    rgba(44, 90, 122, 0.35),
+    rgba(255,255,255,0.10)
+  );
+
+  backdrop-filter: blur(15px);
+
+  -webkit-backdrop-filter: blur(15px);
+
+  border-radius: 25px;
+
+  border: 1px solid rgba(255,255,255,0.35);
+
+  padding: 25px;
+
+  box-shadow:
+    0 10px 35px rgba(0,0,0,0.2);
+
+  color: rgb(10, 4, 4);
+
+  text-align: center;
+
+}
+
+
+.weather-card h2 {
+
+  font-size: 28px;
+
+}
+
+
+.weather-card .temperature h1 {
+
+  font-size: 50px;
+
+  margin: 10px;
+
+}
+.videos-card {
+
+  background: linear-gradient(
+    135deg,
+    rgba(58, 89, 119, 0.3),
+    rgba(255,255,255,0.08)
+  );
+
+  backdrop-filter: blur(15px);
+
+  -webkit-backdrop-filter: blur(15px);
+
+  border-radius: 25px;
+
+  border: 1px solid rgba(255,255,255,0.3);
+
+  padding: 20px;
+
+  box-shadow:
+  0 10px 30px rgba(0,0,0,0.2);
+
+}
+.video-card {
+
+    background: linear-gradient(
+    135deg,
+    rgba(52, 107, 148, 0.3),
+    rgba(26, 39, 57, 0.08)
+  );
+
+  backdrop-filter: blur(8px);
+
+  border-radius: 15px;
+
+  padding: 10px;
+
+  min-width: 220px;
+
+  border:1px solid rgba(255, 247, 247, 0.235);
+
+}
+
+
+.video-card img {
+
+  border-radius: 12px;
+
+}
+
+
+.video-card a {
+
+  color:#0066ff;
+
+}
+#root {
+
+  min-height:100vh;
+
+  overflow-x:hidden;
+
+}
+.footer {
+  color: rgb(30, 46, 60);
+  text-align: center;
+  margin-top: 30px;
+  font-size: 16px;
 }

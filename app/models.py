@@ -1,11 +1,11 @@
-from sqlalchemy import Column, Integer, String, Float, DateTime
+
 from datetime import datetime
 
 from .database import Base
-
+from sqlalchemy import Column, Integer, String, Float, DateTime, Date
 
 class WeatherRecord(Base):
-
+  
     __tablename__ = "weather_records"
 
     id = Column(
@@ -35,3 +35,5 @@ class WeatherRecord(Base):
         DateTime,
         default=datetime.utcnow
     )
+    start_date = Column(Date)
+    end_date = Column(Date)

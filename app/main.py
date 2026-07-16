@@ -4,21 +4,21 @@ from sqlalchemy.orm import Session
 from .database import engine, SessionLocal, Base
 from . import models
 from . import crud
+from dicttoxml import dicttoxml
 
 from .schemas import WeatherCreate
 from .weather_service import get_weather
-
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse , Response
 from .export_service import export_to_csv
 
 from .geocoding_service import get_location_coordinates
-
-from .map_service import create_map_link
-
 from .air_quality_service import get_air_quality
-
+from app.weather_service import get_forecast
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
+from app.weather_service import get_weather_by_coordinates
+from .youtube_service import get_youtube_videos
+
 # Create database tables
 Base.metadata.create_all(bind=engine)
 
@@ -30,7 +30,8 @@ app = FastAPI(
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "http://localhost:5173"
+        "http://localhost:5173",
+        "http://127.0.0.1:5173"
     ],
     allow_credentials=True,
     allow_methods=["*"],
@@ -66,29 +67,18 @@ def create_weather(
     db: Session = Depends(get_db)
 ):
 
-    # Validate dates
-    if weather.start_date > weather.end_date:
-
-        raise HTTPException(
-            status_code=400,
-            detail="Start date must be before end date"
-        )
-
-
     # Get weather from API
     result = get_weather(weather.location)
-
 
     if result is None:
 
         raise HTTPException(
             status_code=404,
-            detail="Location not found"
+            detail=" Enter location"
         )
 
 
     # Save record
-
     new_record = models.WeatherRecord(
 
         location=weather.location,
@@ -98,6 +88,7 @@ def create_weather(
         humidity=result["humidity"],
 
         description=result["description"]
+
     )
 
 
@@ -123,6 +114,31 @@ def read_weather(
     return records
 
 
+@app.get("/export/xml")
+def exportXML(
+db:Session=Depends(get_db)
+):
+
+    records=crud.get_weather_records(db)
+
+    xml=dicttoxml(
+        [
+        {
+        "location":r.location,
+        "temperature":r.temperature,
+        "humidity":r.humidity
+        }
+        for r in records
+        ]
+    )
+
+    return Response(
+        content=xml,
+        media_type="application/xml",
+        headers={
+        "Content-Disposition": "attachment; filename=weather_export.xml"
+    }
+    )
 
 # READ ONE
 @app.get("/weather/{record_id}")
@@ -233,66 +249,23 @@ def get_location(location: str):
 
     return result
 
-@app.get("/map/{location}")
-def get_map(location: str):
+@app.get("/forecast/{location}")
+def forecast_weather(location: str):
 
-    coordinates = get_location_coordinates(location)
+    try:
 
+        return {
+            "location": location,
+            "forecast": get_forecast(location)
+        }
 
-    if coordinates is None:
-
-        raise HTTPException(
-            status_code=404,
-            detail="Location not found"
-        )
-
-
-    map_data = create_map_link(
-        coordinates["latitude"],
-        coordinates["longitude"]
-    )
-
-
-    return {
-        "location": coordinates["name"],
-        "country": coordinates["country"],
-        **map_data
-    }
-
-@app.get("/air-quality/{location}")
-def air_quality(location: str):
-
-    coordinates = get_location_coordinates(location)
-
-
-    if coordinates is None:
+    except Exception as e:
 
         raise HTTPException(
             status_code=404,
-            detail="Location not found"
+            detail=str(e)
         )
-
-
-    result = get_air_quality(
-        coordinates["latitude"],
-        coordinates["longitude"]
-    )
-
-
-    if result is None:
-
-        raise HTTPException(
-            status_code=500,
-            detail="Air quality service unavailable"
-        )
-
-
-    return {
-        "location": coordinates["name"],
-        "country": coordinates["country"],
-        "air_quality": result
-    }
-
+    
 @app.get("/export/json")
 def export_weather_json(
     db: Session = Depends(get_db)
@@ -313,3 +286,79 @@ def export_weather_json(
             for record in records
         ]
     )
+@app.get("/weather/location/{latitude}/{longitude}")
+def weather_by_coordinates(latitude: float, longitude: float):
+
+    try:
+        return get_weather_by_coordinates(
+            latitude,
+            longitude
+        )
+
+    except Exception as e:
+        raise HTTPException(
+            status_code=404,
+            detail=str(e)
+        )
+@app.get("/map-coordinates/{latitude}/{longitude}")
+def get_map_coordinates(latitude: float, longitude: float):
+
+    return {
+        "latitude": latitude,
+        "longitude": longitude,
+        "map_url": 
+        f"https://www.openstreetmap.org/?mlat={latitude}&mlon={longitude}"
+    }
+
+@app.get("/air-quality-coordinates/{latitude}/{longitude}")
+def air_quality_coordinates(latitude: float, longitude: float):
+
+    result = get_air_quality(
+        latitude,
+        longitude
+    )
+
+    if result is None:
+        raise HTTPException(
+            status_code=500,
+            detail="Air quality service unavailable"
+        )
+
+    return {
+        "air_quality": result
+    }
+
+
+@app.get("/youtube/{location}")
+def youtube_videos(location: str):
+
+    try:
+        return get_youtube_videos(location)
+
+    except Exception as e:
+        raise HTTPException(
+            status_code=500,
+            detail=str(e)
+        )
+    
+@app.get("/map-coordinates/{latitude}/{longitude}")
+def map_by_coordinates(latitude: float, longitude: float):
+
+    return {
+        "latitude": latitude,
+        "longitude": longitude,
+        "map_url": f"https://www.openstreetmap.org/?mlat={latitude}&mlon={longitude}"
+    }
+@app.get("/air-quality-coordinates/{latitude}/{longitude}")
+def air_quality_by_coordinates(latitude: float, longitude: float):
+
+    result = get_air_quality(latitude, longitude)
+
+    if result is None:
+        raise HTTPException(status_code=500, detail="Air quality unavailable")
+
+    return {
+        "location": "Current Location",
+        "country": "",
+        "air_quality": result
+    }

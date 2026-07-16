@@ -1,73 +1,60 @@
-# Weather App Backend + React Frontend
-
-A full-stack weather application built with FastAPI and React.
-
-The application allows users to search weather information for different locations, save weather records, view previous searches, export data, view maps, and check air quality.
-
----
+# Weather Application
 
 ## Features
 
-### Weather
-- Search current weather by location
-- Temperature information
-- Humidity information
-- Weather description
-- External API integration
-
-### CRUD Operations
-- Create weather records
-- Read saved records
-- Update locations
-- Delete records
-
-### Additional Features
-- Interactive location map
-- Air quality information
-- Export data as CSV
-- Export data as JSON
-- Responsive dashboard UI
-
----
+ Current Weather by city name
+ Weather using user's current location.
+ 5-Day Weather Forecast.
+ Air Quality Index (AQI).
+ Interactive Map Integration.
+ YouTube Travel Recommendations.
+ Weather Search History.
+ CRUD Operations.
+ Export Weather Data (CSV / JSON).
+ Responsive Glassmorphism UI.
+ Error Handling.
 
 ## Technologies
 
-### Backend
-- Python
-- FastAPI
-- SQLAlchemy
-- SQLite
-- OpenWeather API
+Frontend:
+React.
 
-### Frontend
-- React
-- Vite
-- JavaScript
-- CSS
+Backend:
+FastAPI.
 
----
+Database:
+SQLite.
+
+APIs:
+OpenWeather.
+YouTube.
+OpenStreetMap.
+
 
 ## Project Structure
 
-│
-├── app/
-│ ├── main.py
-│ ├── models.py
-│ ├── schemas.py
-│ ├── crud.py
-│ ├── database.py
-│ ├── weather_service.py
-│ ├── air_quality_service.py
-│ └── map_service.py
-│
-├── frontend/
-│ ├── src/
-│ └── package.json
-│
-├── requirements.txt
-└── README.md
 
----
+ app/
+  main.py
+  models.py
+  schemas.py
+  crud.py
+  database.py
+  weather_service.py
+  air_quality_service.py
+  map_service.py
+
+ frontend/
+   src/
+    package.json
+  requirements.txt
+  README.md
+
+## Environment Variables
+
+Create a config.py file:
+OPENWEATHER_API_KEY="your_api_key"
+YOUTUBE_API_KEY="your_api_key"
 
 ## Run Backend
 
@@ -87,7 +74,7 @@ Backend URL:http://127.0.0.1:8000
 API Documentation:http://127.0.0.1:8000/docs
 
 
----
+
 
 ## Run Frontend
 
@@ -103,22 +90,46 @@ npm run dev
 
 Frontend URL: http://localhost:5173
 
-
 ## API Endpoints
 
-| Method | Endpoint | Description |
-|---|---|---|
-| POST | /weather | Create weather record |
-| GET | /weather | Get all records |
-| GET | /weather/{id} | Get record |
-| PUT | /weather/{id} | Update record |
-| DELETE | /weather/{id} | Delete record |
-| GET | /map/{location} | Get map location |
-| GET | /export/csv | Export CSV |
+ Method , Endpoint , Description :
 
----
+ POST , /weather , Create weather record 
+ GET , /weather , Get all weather records 
+ GET , /weather/{id} , Get weather record by id 
+ PUT , /weather/{id} , Update weather record 
+ DELETE  /weather/{id} , Delete weather record 
+ GET , /forecast/{location} , Get 5-day forecast 
+ GET , /map/{location} , Get map coordinates 
+ GET , /map-coordinates/{lat}/{lon} , Map using coordinates :
+ GET , /air-quality/{location} , Get air quality 
+ GET , /air-quality-coordinates/{lat}/{lon} , Air quality by coordinates :
+ GET , /youtube/{location} , Get YouTube videos 
+ GET , /export/csv , Export CSV file 
+ GET  /export/json , Export JSON data 
 
-## Done by :
+## Database
 
-Rania Adel Atmeh
+The application uses SQLite with SQLAlchemy ORM.
+
+Stored data includes:
+Location.
+Temperature.
+Humidity.
+Weather description.
+Search history.
+
+## Future Improvements
+
+User authentication.
+Weather alerts.
+More weather providers.
+Interactive weather charts.
+Deployment using Docker and cloud services.
+
+## Author
+
+Developed by **Rania Adel Atmeh**
+
+Weather App built for PM Accelerator Technical Assessment.
 
