@@ -1,6 +1,12 @@
+# Videos
+*.mp4
+
+# Environment
 venv/
 .env
+
+# Database
+*.db
+
+# Python cache
 __pycache__/
-*.pyc
-weather.db
-weather_export.csv

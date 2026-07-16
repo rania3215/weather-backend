@@ -1,0 +1,12 @@
+id,location,temperature,humidity,description,created_at
+5,usa,20.05,70.0,scattered clouds,2026-07-14 22:22:26.136850
+6,canada,24.97,30.0,few clouds,2026-07-14 22:29:06.934219
+7,paris,23.01,53.0,overcast clouds,2026-07-16 07:01:33.175766
+8,canada,24.97,30.0,few clouds,2026-07-16 07:04:57.666837
+9,usa,20.05,70.0,scattered clouds,2026-07-16 07:05:08.300723
+10,kuwait,43.21,20.0,clear sky,2026-07-16 07:05:20.791960
+11,qatar,43.81,13.0,clear sky,2026-07-16 07:06:43.838564
+12,paris,23.44,52.0,overcast clouds,2026-07-16 07:07:43.947486
+13,amman,26.93,40.0,clear sky,2026-07-16 07:09:42.630389
+15,paris,23.86,51.0,overcast clouds,2026-07-16 07:15:00.073316
+16,usa,20.05,70.0,scattered clouds,2026-07-16 07:19:11.664753
