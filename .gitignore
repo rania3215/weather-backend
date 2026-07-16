@@ -10,3 +10,5 @@ venv/
 
 # Python cache
 __pycache__/
+
+weather_export.csv

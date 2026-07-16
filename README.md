@@ -13,7 +13,33 @@
  Export Weather Data (CSV / JSON).
  Responsive Glassmorphism UI.
  Error Handling.
+## Screenshots
 
+### Weather Dashboard
+![Weather Dashboard](screenshots/home.png)
+
+### Weather Result
+![Weather Result](screenshots/weather-card.png)
+
+### Forecast
+![Forecast](screenshots/forecast.png)
+
+### Map Integration
+![Map](screenshots/map.png)
+
+### YouTube Recommendations
+![YouTube](screenshots/youtube.png)
+
+### Previous Searches
+![Previous Searches](screenshots/previousSearches.png)
+
+### Air Quality card
+![Air Quality card](screenshots/aqi.png)
+
+### swagger home page
+![swagger home page](screenshots/swagger.png)
+
+swagger
 ## Technologies
 
 Frontend:
